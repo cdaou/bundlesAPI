@@ -57,7 +57,7 @@ URI  | HTTP Verbs | Action
 
 # Instructions
 
-* Unzip and import Existing Maven Projects from “BundlesProject” folder into your IDE.
+* Import Existing Maven Projects from “BundlesProject” folder into your IDE.
 * Run BundlesProjectApplication class from /BundlesProject/src/main/java/com/restapi/BundlesProject/
 * Visit http://localhost:8080/bundles to list all bundles in ascending order by code.
 
