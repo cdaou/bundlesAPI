@@ -1,5 +1,5 @@
 # bundlesAPI
-Implementation of the backend server (the "Service") and its API that will be consumed by the Administrator Interface in order for Bundles to be created and stored in the system’s Database
+Implementation of the backend server (the "Service") and its API that will be consumed by the Administrator Interface in order for Bundles to be created and stored in the system’s Database.
 
 ## Description
 A new Service will be developed. This service enables existing users to activate offers from a pool of pre-existing offers (from now on called Bundles). In order for these offers to become available to the users that use Vodafone’s services there will be an administrator interface available for administrators which they will use to insert new Bundles available for purchase. This administrator Interface will communicate with the backend server via a REST API that will be exposed from the Backend. 
