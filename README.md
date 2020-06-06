@@ -64,8 +64,7 @@ URI  | HTTP Verbs | Action
 # H2-Console
 
 H2 database enables the use of a console, in which transactions with the database can
-be made very easily. It can be accessed by a browser using http://localhost:8080/h2-
-console. This tool can be used for adding, editing or deleting bundles. Additionally, it
+be made very easily. It can be accessed by a browser using http://localhost:8080/h2-console. This tool can be used for adding, editing or deleting bundles. Additionally, it
 can sort the items (ascending or descending order) by any column. Last but not least
 it can run database queries. It is a very fast and easy way to edit the database. Please
 connect with the credentials shown in the following image.
