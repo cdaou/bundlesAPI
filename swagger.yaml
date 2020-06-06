@@ -1,0 +1,286 @@
+swagger: "2.0"
+info:
+  description: "This is an api for accessing, editing and adding bundles to the server"
+  version: "1.0.0"
+  title: "BundlesAPI"
+  contact:
+    email: "daoulas@outlook.com"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "localhost:8080"
+basePath: "/bundles"
+schemes:
+- "http"
+paths:
+  /bundles:
+    get:
+      summary: "Gets all the bundles"
+      description: "Returns a json list containing all bundles in ascending by code order"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "JSON list of bundles"
+          schema:
+            type: "array"
+            items:
+              properties:
+                code: 
+                  type: "number"
+                name:
+                  type: "string"
+                price:
+                  type: "number"
+                activated:
+                  type: "boolean"
+                expiration:
+                  description: "Timestamp object"
+                  type: "object"
+                availability:
+                  description: "Timestamp object"
+                  type: "object"
+        404:
+          description: "Database not found"
+    post:
+      summary: "Add a new bundle to the database"
+      description: "It must be added a bundle object in json format"
+      produces:
+      - "application/json"
+      consumes:
+      - "application/json"
+      - "multipart/form-data"
+      parameters:
+      - name: "code" 
+        in: "formData"
+        required: true
+        description: "the code of the bundle (primary key)"
+        type: "number"
+      - name: "name"
+        in: "formData"
+        required: true
+        description: "the name of the bundle (greater than 1 character and smaller than 100 characters)"
+        type: "string"
+      - name: "price"
+        in: "formData"
+        required: true
+        description: "the price of the bundle (float, not null)"
+        type: "number"
+      - name: "activated"
+        in: "formData"
+        required: true
+        description: "true if bundle is activated (not null)"
+        type: "boolean"
+      - name: "expiration"
+        in: "formData"
+        required: true
+        description: "expiration date (timestamp)"
+        type: "string"
+      - name: "availability"
+        in: "formData"
+        required: true
+        description: "availability date (timestamp, not null)"
+        type: "string"
+      responses:
+        "200":
+          description: "Bundle already exists. Please use PUT if you want to update it. OR Bundle was succesfully added."
+        "400":
+          description: "Failed!"
+        "415":
+          description: "Unsupported Media Type"
+        
+  /bundles/{code}:
+    get:
+      summary: "Return tha bundle with a certain code"
+      description: "Returns a json list containing all the properties of the bundle"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "code" 
+        in: "path"
+        required: true
+        description: "the code of the bundle (primary key)"
+        type: "number"
+      responses:
+        200:
+          description: "Bundle's properties"
+          schema:
+            type: "array"
+            items:
+              properties:
+                code: 
+                  type: "number"
+                name:
+                  type: "string"
+                price:
+                  type: "number"
+                activated:
+                  type: "boolean"
+                expiration:
+                  description: "Timestamp object"
+                  type: "object"
+                availability:
+                  description: "Timestamp object"
+                  type: "object"
+              
+        404:
+          description: "Bundle not found"
+    put:
+      summary: "Update a bundle"
+      description: "Updates the properties of a bundle"
+      consumes:
+      - "application/json"
+      - "multipart/form-data"
+      parameters:
+      - name: "code" 
+        in: "path"
+        required: true
+        description: "the code of the bundle (primary key)"
+        type: "number"
+      - name: "code" 
+        in: "formData"
+        required: true
+        description: "the code of the bundle (primary key)"
+        type: "number"
+      - name: "name"
+        in: "formData"
+        required: true
+        description: "the name of the bundle (greater than 1 character and smaller than 100 characters)"
+        type: "string"
+      - name: "price"
+        in: "formData"
+        required: true
+        description: "the price of the bundle (float, not null)"
+        type: "number"
+      - name: "activated"
+        in: "formData"
+        required: true
+        description: "true if bundle is activated (not null)"
+        type: "boolean"
+      - name: "expiration"
+        in: "formData"
+        required: true
+        description: "expiration date (timestamp)"
+        type: "string"
+      - name: "availability"
+        in: "formData"
+        required: true
+        description: "availability date (timestamp, not null)"
+        type: "string"
+      responses:
+        "200":
+          description: "Bundle doesn't exist. OR Bundle was succesfully updated."
+        "400":
+          description: "Bad Request"
+        "415":
+          description: "Unsupported Media Type"
+    delete:
+      summary: "Deletes a bundle"
+      parameters:
+      - name: "code" 
+        in: "path"
+        required: true
+        description: "the code of the bundle (primary key)"
+        type: "number"
+      responses:
+        "200": 
+          description: "Bundle was succesfully deleted. OR Bundle doesn't exist."
+  /bundles/sortbyname:
+    get:
+      summary: "Bundles in ascending order by name"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "JSON list of sorted bundles"
+          schema:
+            type: "array"
+            items:
+              properties:
+                code: 
+                  type: "number"
+                name:
+                  type: "string"
+                price:
+                  type: "number"
+                activated:
+                  type: "boolean"
+                expiration:
+                  description: "Timestamp object"
+                  type: "object"
+                availability:
+                  description: "Timestamp object"
+                  type: "object"
+        404:
+          description: "Database not found"
+  /bundles/sortbypriceasc:
+    get:
+      summary: "Bundles in ascending order by price"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "JSON list of sorted bundles"
+          schema:
+            type: "array"
+            items:
+              properties:
+                code: 
+                  type: "number"
+                name:
+                  type: "string"
+                price:
+                  type: "number"
+                activated:
+                  type: "boolean"
+                expiration:
+                  description: "Timestamp object"
+                  type: "object"
+                availability:
+                  description: "Timestamp object"
+                  type: "object"
+        404:
+          description: "Database not found"
+  /bundles/sortbypricedesc:
+    get:
+      summary: "Bundles in descending order by price"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "JSON list of sorted bundles"
+          schema:
+            type: "array"
+            items:
+              properties:
+                code: 
+                  type: "number"
+                name:
+                  type: "string"
+                price:
+                  type: "number"
+                activated:
+                  type: "boolean"
+                expiration:
+                  description: "Timestamp object"
+                  type: "object"
+                availability:
+                  description: "Timestamp object"
+                  type: "object"
+        404:
+          description: "Database not found"
+  
+      
+          
+        
+        
+      
+          
+          
+          
+                  
+                
+                
+                
+
+ 
