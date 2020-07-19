@@ -51,9 +51,7 @@ URI  | HTTP Verbs | Action
 /bundles  | POST | Create a new bundle
 /bundles/{code} | GET | Get a specific bundle
 /bundles/{code} | PUT | Update a specific bundle
-/bundles/sortbyname | GET | List all bundles in ascending order by name
-/bundles/sortbypriceasc | GET | List all bundles in ascending order by price
-/bundles/sortbypricedesc | GET | List all bundles in descending order by price
+/bundles/sort?by={sort_key}&dir={asc OR desc} | GET | List all bundles in {dir} order by {sort_key}
 
 # Instructions
 
