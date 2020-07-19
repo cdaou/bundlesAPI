@@ -83,11 +83,11 @@ paths:
         type: "string"
       responses:
         "200":
-          description: "Bundle already exists. Please use PUT if you want to update it. OR Bundle was succesfully added."
+          description: "Bundle was succesfully added."
+        "500":
+          description: "not-null property references a null or transient value."
         "400":
-          description: "Failed!"
-        "415":
-          description: "Unsupported Media Type"
+          description: "Bundle already exists. Please use PUT if you want to update it."
         
   /bundles/{code}:
     get:
@@ -169,11 +169,11 @@ paths:
         type: "string"
       responses:
         "200":
-          description: "Bundle doesn't exist. OR Bundle was succesfully updated."
+          description: "Bundle was succesfully updated."
+        "500":
+          description: "not-null property references a null or transient value."
         "400":
-          description: "Bad Request"
-        "415":
-          description: "Unsupported Media Type"
+          description: "Bundle doesn't exist"
     delete:
       summary: "Deletes a bundle"
       parameters:
@@ -183,11 +183,13 @@ paths:
         description: "the code of the bundle (primary key)"
         type: "number"
       responses:
-        "200": 
-          description: "Bundle was succesfully deleted. OR Bundle doesn't exist."
-  /bundles/sortbyname:
+        "200":
+          description: "Bundle was succesfully deleted."
+        "400":
+          description: "Bundle doesn't exist"
+  /bundles/sort?by={sort_key}&dir={asc OR desc}:
     get:
-      summary: "Bundles in ascending order by name"
+      summary: "Order bundles by {sort_key} in {dir} direction"
       produces:
       - "application/json"
       responses:
@@ -212,75 +214,4 @@ paths:
                   description: "Timestamp object"
                   type: "object"
         404:
-          description: "Database not found"
-  /bundles/sortbypriceasc:
-    get:
-      summary: "Bundles in ascending order by price"
-      produces:
-      - "application/json"
-      responses:
-        200:
-          description: "JSON list of sorted bundles"
-          schema:
-            type: "array"
-            items:
-              properties:
-                code: 
-                  type: "number"
-                name:
-                  type: "string"
-                price:
-                  type: "number"
-                activated:
-                  type: "boolean"
-                expiration:
-                  description: "Timestamp object"
-                  type: "object"
-                availability:
-                  description: "Timestamp object"
-                  type: "object"
-        404:
-          description: "Database not found"
-  /bundles/sortbypricedesc:
-    get:
-      summary: "Bundles in descending order by price"
-      produces:
-      - "application/json"
-      responses:
-        200:
-          description: "JSON list of sorted bundles"
-          schema:
-            type: "array"
-            items:
-              properties:
-                code: 
-                  type: "number"
-                name:
-                  type: "string"
-                price:
-                  type: "number"
-                activated:
-                  type: "boolean"
-                expiration:
-                  description: "Timestamp object"
-                  type: "object"
-                availability:
-                  description: "Timestamp object"
-                  type: "object"
-        404:
-          description: "Database not found"
-  
-      
-          
-        
-        
-      
-          
-          
-          
-                  
-                
-                
-                
-
- 
+          description: "No property found"
